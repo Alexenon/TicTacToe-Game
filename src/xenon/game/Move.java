@@ -1,24 +1,37 @@
-package xenon;
+package xenon.game;
+
+import xenon.players.ComputerPlayer;
+import xenon.players.HumanPlayer;
 
 import java.util.Scanner;
 
-import static xenon.Player.currentPlayer;
+import static xenon.players.Player.currentPlayer;
 
-public class Move extends Board{
+public class Move extends Board {
 
-    int row, col;
+    public int row;
+    public int col;
     static char computer, opponent;
 
-    Move() {
+    public Move() {
         computer = currentPlayer.getPlayerCharacter();
         opponent = (computer == 'X') ? 'O' : 'X';
     }
 
+    public void moveByCurrentPlayer(){
+        if(currentPlayer instanceof HumanPlayer) {
+            moveByAskingIndexes();
+        }
+        else{
+            Move bestMove = Move.findBestMove();
+            bestMove.move(bestMove.row, bestMove.col, currentPlayer.getPlayerCharacter());
+        }
+    }
+
     /**
-     * This function asks the user to input 2 indexes
-     * and call method move(index1, index2)
+     * Move by asked indexes from user
      * */
-    public void moveAskingIndexes(){
+    public void moveByAskingIndexes(){
         /* Check if current player isn't a human one */
         if(currentPlayer instanceof ComputerPlayer)
             throw new IllegalStateException("ERROR, THIS IS NOT A HUMAN!");
@@ -38,7 +51,7 @@ public class Move extends Board{
             board[x][y] = sign;
         else {
             printError("ERROR! THIS POSITION IS ALREADY TAKEN!");
-            moveAskingIndexes();
+            moveByAskingIndexes();
         }
     }
 
