@@ -18,6 +18,10 @@ public class Move extends Board {
         opponent = (computer == 'X') ? 'O' : 'X';
     }
 
+    /**
+     * This method is called in main function,
+     * it depends on which player's turn is now
+     * */
     public void moveByCurrentPlayer(){
         if(currentPlayer instanceof HumanPlayer) {
             moveByAskingIndexes();
@@ -31,7 +35,8 @@ public class Move extends Board {
     /**
      * Move by asked indexes from user
      * */
-    public void moveByAskingIndexes(){
+    private void moveByAskingIndexes(){
+
         /* Check if current player isn't a human one */
         if(currentPlayer instanceof ComputerPlayer)
             throw new IllegalStateException("ERROR, THIS IS NOT A HUMAN!");
@@ -46,7 +51,7 @@ public class Move extends Board {
         move(x, y, currentPlayer.getPlayerCharacter());
     }
 
-    public void move(int x, int y, char sign){
+    private void move(int x, int y, char sign){
         if(isPositionAvailable(x, y))
             board[x][y] = sign;
         else {
