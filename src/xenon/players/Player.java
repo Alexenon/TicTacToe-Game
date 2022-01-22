@@ -1,4 +1,4 @@
-package xenon;
+package xenon.players;
 
 import java.util.Scanner;
 

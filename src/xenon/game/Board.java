@@ -1,6 +1,6 @@
-package xenon;
+package xenon.game;
 
-import static xenon.Player.currentPlayer;
+import static xenon.players.Player.currentPlayer;
 
 public class Board {
 
@@ -79,11 +79,11 @@ public class Board {
         return true;
     }
 
-    public boolean gameOver(){
-        return isDraw() ||
-                isWonByColumn() ||
-                isWonByRow() ||
-                isWonByDiagonal();
+    public boolean isGameRunning(){
+        return !isDraw() &&
+                !isWonByColumn() &&
+                !isWonByRow() &&
+                !isWonByDiagonal();
     }
 
     public String getFinalMessage(){

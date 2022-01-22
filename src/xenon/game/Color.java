@@ -1,4 +1,4 @@
-package xenon;
+package xenon.game;
 
 enum Color {
     //Color end string, color reset

@@ -1,4 +1,4 @@
-package xenon;
+package xenon.players;
 
 public class HumanPlayer extends Player {
 
