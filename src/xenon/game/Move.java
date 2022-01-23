@@ -32,15 +32,6 @@ public class Move extends Board {
         }
     }
 
-    private void askIndexes() {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter indexes: ");
-        System.out.print("row=");
-        row = scan.nextInt();
-        System.out.print("col=");
-        col = scan.nextInt();
-    }
-
     /**
      * Move by asked indexes from user
      * */
@@ -52,6 +43,18 @@ public class Move extends Board {
         Move playerMove = new Move();
         playerMove.askIndexes();
         move(playerMove.row, playerMove.col, currentPlayer.getPlayerCharacter());
+    }
+
+    /**
+     * Asks the player for indexes and store them in variables
+     * */
+    private void askIndexes() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please enter indexes: ");
+        System.out.print("row=");
+        row = scan.nextInt();
+        System.out.print("col=");
+        col = scan.nextInt();
     }
 
     private void move(int x, int y, char sign){
