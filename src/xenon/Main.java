@@ -23,8 +23,8 @@ public class Main {
 
             board.printWhoMoves();
             move.moveByCurrentPlayer();
-
             board.printBoard();
+
             if(board.isGameRunning()) {
                 Player.nextPlayer();
             }
