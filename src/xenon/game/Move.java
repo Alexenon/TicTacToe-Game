@@ -11,7 +11,7 @@ public class Move extends Board {
 
     public int row;
     public int col;
-    static char computer, opponent;
+    private static char computer, opponent;
 
     public Move() {
         computer = currentPlayer.getPlayerCharacter();
@@ -32,23 +32,26 @@ public class Move extends Board {
         }
     }
 
+    private void askIndexes() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please enter indexes: ");
+        System.out.print("row=");
+        row = scan.nextInt();
+        System.out.print("col=");
+        col = scan.nextInt();
+    }
+
     /**
      * Move by asked indexes from user
      * */
     private void moveByAskingIndexes(){
-
-        /* Check if current player isn't a human one */
         if(currentPlayer instanceof ComputerPlayer)
             throw new IllegalStateException("ERROR, THIS IS NOT A HUMAN!");
 
-        /* Asking human to introduce indexes and call method move */
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter indexes: ");
-        System.out.print("row=");
-        int x = scan.nextInt();
-        System.out.print("col=");
-        int y = scan.nextInt();
-        move(x, y, currentPlayer.getPlayerCharacter());
+        // Ask player to introduce indexes and call method move
+        Move playerMove = new Move();
+        playerMove.askIndexes();
+        move(playerMove.row, playerMove.col, currentPlayer.getPlayerCharacter());
     }
 
     private void move(int x, int y, char sign){
