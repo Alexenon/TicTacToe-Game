@@ -8,8 +8,7 @@ import xenon.players.Player;
 public class Main {
 
     /**
-     * TODO: Add all this stuff in certain project
-     *  Add flexible board n x n tiles
+     * TODO: Add flexible board n x n tile
      * */
     public static void main(String[] args) {
 
@@ -19,13 +18,12 @@ public class Main {
         Move move = new Move();
 
         System.out.println(human + " vs " + opponent);
-
         while(board.isGameRunning()){
 
             board.printWhoMoves();
             move.moveByCurrentPlayer();
-
             board.printBoard();
+
             if(board.isGameRunning()) {
                 Player.nextPlayer();
             }

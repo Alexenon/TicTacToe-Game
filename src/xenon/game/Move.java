@@ -9,15 +9,19 @@ import static xenon.players.Player.currentPlayer;
 
 public class Move extends Board {
 
-    public int row;
-    public int col;
-    static char computer, opponent;
+    private int row;
+    private int col;
+    private static char computer, opponent;
 
     public Move() {
         computer = currentPlayer.getPlayerCharacter();
         opponent = (computer == 'X') ? 'O' : 'X';
     }
 
+    /**
+     * This method is called in main function,
+     * it depends on which player's turn is now
+     * */
     public void moveByCurrentPlayer(){
         if(currentPlayer instanceof HumanPlayer) {
             moveByAskingIndexes();
@@ -29,28 +33,49 @@ public class Move extends Board {
     }
 
     /**
+     * @param input should be a number between 1 and 9
+     * otherwise will throw an error
+     * */
+    public static Pair<Integer, Integer> inputToIndexes(int input) {
+        if (input < 1 || input > 9)
+            throw new IllegalArgumentException("ERROR, WRONG INPUT!");
+
+        input = input - 1; // easier to perform calculations
+        int firstIndex = input / 3;
+        int secondIndex = input - firstIndex * 3;
+        return new Pair<>(firstIndex, secondIndex);
+    }
+
+    /**
      * Move by asked indexes from user
      * */
-    public void moveByAskingIndexes(){
-        /* Check if current player isn't a human one */
+    private void moveByAskingIndexes(){
         if(currentPlayer instanceof ComputerPlayer)
             throw new IllegalStateException("ERROR, THIS IS NOT A HUMAN!");
 
-        /* Asking human to introduce indexes and call method move */
+        // Ask player to introduce indexes and call method move
+        Move playerMove = new Move();
+        playerMove.askIndexes();
+        move(playerMove.row, playerMove.col, currentPlayer.getPlayerCharacter());
+    }
+
+    /**
+     * Asks the player for indexes and store them in variables
+     * */
+    private void askIndexes() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please enter indexes: ");
         System.out.print("row=");
-        int x = scan.nextInt();
+        row = scan.nextInt();
         System.out.print("col=");
-        int y = scan.nextInt();
-        move(x, y, currentPlayer.getPlayerCharacter());
+        col = scan.nextInt();
     }
 
-    public void move(int x, int y, char sign){
+    private void move(int x, int y, char sign){
         if(isPositionAvailable(x, y))
             board[x][y] = sign;
         else {
-            printError("ERROR! THIS POSITION IS ALREADY TAKEN!");
+            printError("THIS POSITION IS ALREADY TAKEN!");
             moveByAskingIndexes();
         }
     }
