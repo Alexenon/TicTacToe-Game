@@ -4,8 +4,8 @@ import static xenon.players.Player.currentPlayer;
 
 public class Board {
 
-    final int GRID_SIZE = 3;
-    final String dashes = "_".repeat(10);
+    private final int GRID_SIZE = 3;
+    private final String dashes = "_".repeat(10);
 
     static final Character[][] board = {
             {'1', '2', '3'},
@@ -27,7 +27,6 @@ public class Board {
     }
 
     public void printBoard() {
-
         printWithColor(dashes, Color.YELLOW_BOLD_BRIGHT);
 
         for (int i = 0; i < GRID_SIZE; i++){
@@ -45,26 +44,22 @@ public class Board {
             }
             System.out.println();
         }
-
         printWithColor(dashes, Color.YELLOW_BOLD_BRIGHT);
     }
 
     private boolean isWonByRow(){
-
         return (board[0][0] == board[0][1] && board[0][1] == board[0][2]) ||
                 (board[1][0] == board[1][1] && board[1][1] == board[1][2]) ||
                 (board[2][0] == board[2][1] && board[2][1] == board[2][2]);
     }
 
     private boolean isWonByColumn(){
-
         return (board[0][0] == board[1][0] && board[1][0] == board[2][0]) ||
                 (board[0][1] == board[1][1] && board[1][1] == board[2][1]) ||
                 (board[0][2] == board[1][2] && board[1][2] == board[2][2]);
     }
 
     private boolean isWonByDiagonal(){
-
         return (board[0][0] == board[1][1] && board[1][1] == board[2][2]) ||
                 (board[0][2] == board[1][1] && board[1][1] == board[2][0]);
     }

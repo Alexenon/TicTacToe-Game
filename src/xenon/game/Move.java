@@ -9,8 +9,8 @@ import static xenon.players.Player.currentPlayer;
 
 public class Move extends Board {
 
-    public int row;
-    public int col;
+    private int row;
+    private int col;
     private static char computer, opponent;
 
     public Move() {
@@ -30,6 +30,20 @@ public class Move extends Board {
             Move bestMove = Move.findBestMove();
             bestMove.move(bestMove.row, bestMove.col, currentPlayer.getPlayerCharacter());
         }
+    }
+
+    /**
+     * @param input should be a number between 1 and 9
+     * otherwise will throw an error
+     * */
+    public static Pair<Integer, Integer> inputToIndexes(int input) {
+        if (input < 1 || input > 9)
+            throw new IllegalArgumentException("ERROR, WRONG INPUT!");
+
+        input = input - 1; // easier to perform calculations
+        int firstIndex = input / 3;
+        int secondIndex = input - firstIndex * 3;
+        return new Pair<>(firstIndex, secondIndex);
     }
 
     /**
@@ -61,7 +75,7 @@ public class Move extends Board {
         if(isPositionAvailable(x, y))
             board[x][y] = sign;
         else {
-            printError("ERROR! THIS POSITION IS ALREADY TAKEN!");
+            printError("THIS POSITION IS ALREADY TAKEN!");
             moveByAskingIndexes();
         }
     }

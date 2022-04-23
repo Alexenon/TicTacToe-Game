@@ -8,8 +8,7 @@ import xenon.players.Player;
 public class Main {
 
     /**
-     * TODO: Think about making certain move directly in player class
-     *  Add flexible board n x n tile
+     * TODO: Add flexible board n x n tile
      * */
     public static void main(String[] args) {
 
